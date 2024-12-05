@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { memberLogin } from '../api/member'
 
 export default function Study() {
 
@@ -9,11 +10,30 @@ export default function Study() {
     const pwRef = useRef('');
 
     const loginAction = () => {
-        console.log('abcd');
 
         const idValue = idRef.current.value;
         const pwValue = pwRef.current.value;
-        console.log(pwValue);
+
+        //데이터 포장
+        let obj = new Object();
+        obj.userId = idValue;
+        obj.userPw = pwValue;
+
+        memberLogin(obj)
+        .then(res => {
+            const data = res.data;
+            if(data.code === '200' && data.data === 'Y') {
+                //다음 페이지 이동!
+                console.log('성공');
+            }
+            else {
+                idRef.current.value = '';
+                pwRef.current.value = '';
+                idRef.current.focus();
+                alert('아이디를 재 입력해주세요.');
+            }
+            
+        })
     }
 
     return (

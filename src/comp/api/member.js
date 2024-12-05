@@ -31,3 +31,8 @@ export const areaList = () => {
 export const memberRegist = (obj) => {
     return api.post('/member/regist', JSON.stringify(obj))
 }
+
+
+export const memberLogin = (obj) => {
+    return api.post('/member/login', JSON.stringify(obj))
+}
