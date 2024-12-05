@@ -22,3 +22,12 @@ export const memberIdCheck = (obj) => {
 export const areaList = () => {
     return api.get('/area/list');
 }
+
+/**
+ * 회원가입 기능
+ * @param {}
+ * @returns 
+ */
+export const memberRegist = (obj) => {
+    return api.post('/member/regist', JSON.stringify(obj))
+}

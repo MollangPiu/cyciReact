@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { memberIdCheck, areaList } from '../api/member'
+import { memberIdCheck, areaList, memberRegist } from '../api/member'
 
 function Study() {
 
@@ -53,6 +53,14 @@ function Study() {
     }
 
     console.log(obj);
+    memberRegist(obj)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log('err: ', err);
+      console.log(`err:  ${err}`);
+    })
   }
  
   return (
