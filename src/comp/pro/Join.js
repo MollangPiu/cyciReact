@@ -3,8 +3,15 @@ import { memberIdCheck, areaList } from '../api/member'
 
 function Study() {
 
-  const [아이디, 변경아이디] = useState('');
-  const [areas, setAreas] = useState([]);
+  const [아이디, 변경아이디] = useState('');        //아이디 입력
+  const [password, setPassword] =  useState('');  //비밀번호 입력
+  const [name, setName] = useState('');           //이름 입력
+  const [email, setEmail] = useState('');         //이메일 입력
+  const [gender, setGender] = useState('M');      //성별 ( 기본값: 남자 )
+  const [birth, setBirth] = useState('');         //생년 월일
+  const [area, setArea] = useState('');           //지역
+
+  const [areas, setAreas] = useState([]);       //지역 리스트
 
   //화면이 처음 출력 되었을 때, list에 어떻게 표현 시킬 것인가?
   
@@ -21,13 +28,36 @@ function Study() {
     console.log('=== startList');
     areaList()
     .then(res => {
-      console.log(res);
-      setAreas(res.data.data);
+      setAreas(res.data.data);            // select 지역리스트 추가
+      setArea(res.data.data[0].idx);      // 지역코드 기본값 ( 첫 번재 index )
     })
+  }
+
+  /**
+   * 회원가입 시 동작 되도록!
+   */
+  function joinAction() {
+
+    //유효성 검사!
+    //JavaScript 유효성 검사 코드
+
+    //값 담는다.
+    const obj = {
+      'userId': 아이디,
+      'userPw': password,
+      'userName': name,  
+      'email': email,
+      'birth': birth,
+      'gender': gender,
+      'areaIdx': area
+    }
+
+    console.log(obj);
   }
  
   return (
     <div className="App">
+      {/* 아이디 */}
       <input 
         type='text'
         placeholder='아이디 입력'
@@ -54,15 +84,61 @@ function Study() {
             console.log(err);
           })
         }
-      }/>
+      }/><br/>
 
-      <select>
+
+      <input
+        type="password"
+        placeholder='비밀번호 입력'
+        value={password}
+        onChange={
+          e=>setPassword(e.target.value)
+        }
+      /><br/>
+      <input 
+        type="text"
+        placeholder='이름 입력해주세요.'
+        value={name}
+        onChange={e=> setName(e.target.value)}
+        /><br/>
+      <input
+        type="email"
+        placeholder='이메일 입력해주세요.'
+        value={email}
+        onChange={e=>setEmail(e.target.value)}
+        /><br/>
+      <input
+        type="radio"
+        name="gender"
+        value="M"  checked
+        onChange={e=> {
+          setGender(e.target.value)
+        }} />남자
+      <input
+        type="radio"
+        name="gender"
+        value="F"
+        onChange={e=> {
+          setGender(e.target.value)
+        }} />여자<br/>
+      생년월일 <input
+        type="date"
+        value={birth}
+        onChange={e=>{setBirth(e.target.value)}}
+        /> <br/>
+
+
+      지역코드
+      <select onChange={e => setArea(e.target.value)}>
         {areas.map((item, index) => (
           <option key={index} value={item.idx}>
             {item.areaName}
           </option>
         ))}
       </select>
+
+        {/* submit은 유효성 검사가 힘들다. */}
+      <input type="button" value="회원가입" onClick={joinAction} />
     </div>
   );
 }
