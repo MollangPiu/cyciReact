@@ -15,6 +15,10 @@ export const memberIdCheck = (obj) => {
     })
 }
 
+/**
+ * 지역 리스트 불러오기
+ * @returns 
+ */
 export const areaList = () => {
     return api.get('/area/list');
 }
