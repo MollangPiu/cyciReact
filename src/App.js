@@ -9,6 +9,7 @@ import Ref from './comp/inp/Ref01'
 
 import ProJoin from './comp/pro/Join'
 import ProLogin from './comp/pro/Login'
+import ProItemList from './comp/pro/ItemList'
 
 import Ax1 from './comp/ax/ax01'
 
@@ -28,6 +29,7 @@ function App() {
 
           <Route path={"/pro1"} element={<ProJoin />} />
           <Route path={"/login"} element={<ProLogin />} />
+          <Route path={"/itemList"} element={<ProItemList />} />
 
           <Route path={"/ax1"} element={<Ax1 />} />
         </Routes>
@@ -62,6 +64,7 @@ function Home() {
       <h4>기능</h4>
       <Link to="/pro1">회원가입 창</Link><br/>
       <Link to="/login">로그인</Link>
+      <Link to="/itemList">아이템 리스트</Link>
     </div>
   )
 }

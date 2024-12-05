@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { memberLogin } from '../api/member'
 
@@ -8,6 +8,11 @@ export default function Study() {
 
     const idRef = useRef('');
     const pwRef = useRef('');
+
+    //페이지 접속 했을 때.
+    useEffect(() => {
+        localStorage.removeItem('userId');
+    }, [])
 
     const loginAction = () => {
 
@@ -24,7 +29,9 @@ export default function Study() {
             const data = res.data;
             if(data.code === '200' && data.data === 'Y') {
                 //다음 페이지 이동!
-                console.log('성공');
+                localStorage.setItem('userId', idValue);        //권한 등록
+                localStorage.setItem('auto', 'random  UUID JWT');
+                navigate('/itemList');      //아이템 리스트 이동
             }
             else {
                 idRef.current.value = '';
