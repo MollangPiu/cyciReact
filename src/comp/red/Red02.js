@@ -12,7 +12,7 @@ function reducerResult(status, action) {
     switch(action.op) {
         case "+":
             return action.num1+action.num2;
-        case "+":
+        case "-":
             return action.num1-action.num2;
         case "*":
             return action.num1*action.num2;
@@ -31,12 +31,16 @@ function reducerHistory(state, action) {
     switch(action.op) {
         case "+":
             res = action.num1+action.num2;
-        case "+":
+            break;
+        case "-":
             res = action.num1-action.num2;
+            break;
         case "*":
             res = action.num1*action.num2;
+            break;
         case "/":
             res = action.num1/action.num2;
+            break;
     }
 
     let obj = {...action, 'result': res};
