@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { ContextAPI } from './context/ContextAPi';
 
 import Calc1 from './comp/calc/study01'
 
@@ -15,38 +16,53 @@ import Ax1 from './comp/ax/ax01'
 
 import Red01 from './comp/red/Red01'
 import Red02 from './comp/red/Red02'
+import ContetxtAction from './comp/red/ContextAction';
+
+import { useContext, useState } from 'react';
 
 function App() {
+
+  const [parent, setParent] = useState(0);
+
   return (
     <div className="App">
-      <BrowserRouter>
-        <About />
-        <Routes>
-          <Route path={"/"} element={<Home />} />
-          <Route path={"/about"} element={<About />} />
-          <Route path={"/cal1"} element={<Calc1 />} />
+      <ContextAPI.Provider value={{parent, setParent}}>
+        <BrowserRouter>
+          <About />
+          <Routes>
+            
+            <Route path={"/"} element={<Home />} />
+            <Route path={"/about"} element={<About />} />
+            <Route path={"/cal1"} element={<Calc1 />} />
 
-          <Route path={"/inp1"} element={<Inp1 />} />
-          <Route path={"/oup1"} element={<Oup1 />} />
-          <Route path={"/ref1"} element={<Ref />} />
+            <Route path={"/inp1"} element={<Inp1 />} />
+            <Route path={"/oup1"} element={<Oup1 />} />
+            <Route path={"/ref1"} element={<Ref />} />
 
-          <Route path={"/pro1"} element={<ProJoin />} />
-          <Route path={"/login"} element={<ProLogin />} />
-          <Route path={"/itemList"} element={<ProItemList />} />
+            <Route path={"/pro1"} element={<ProJoin />} />
+            <Route path={"/login"} element={<ProLogin />} />
+            <Route path={"/itemList"} element={<ProItemList />} />
 
-          <Route path={"/ax1"} element={<Ax1 />} />
-          <Route path={'/red01'} element={<Red01 />} />
-          <Route path={'/red02'} element={<Red02 />} />
-        </Routes>
-      </BrowserRouter>
+            <Route path={"/ax1"} element={<Ax1 />} />
+            <Route path={'/red01'} element={<Red01 />} />
+            <Route path={'/red02'} element={<Red02 />} />
+            <Route path={'/last'} element={<ContetxtAction />} />
+          </Routes>
+        </BrowserRouter>
+      </ContextAPI.Provider>
     </div>
   );
 }
 
 function About() {
+
+  const { parent , setParent } = useContext(ContextAPI);
+
   return (
     <div style={{border: '2px blue solid'}}>
       <Link to="/">Home으로 이동</Link>
+      <br/>
+      context 값: {parent}
     </div>
   )
 }
@@ -73,6 +89,7 @@ function Home() {
 
       <Link to='/red01'>리듀서 01</Link><br/>
       <Link to='/red02'>리듀서 02</Link><br/>
+      <Link to='/last'>Context 값 변경하기</Link><br/>
     </div>
   )
 }
