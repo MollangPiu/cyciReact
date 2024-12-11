@@ -13,6 +13,8 @@ import ProItemList from './comp/pro/ItemList'
 
 import Ax1 from './comp/ax/ax01'
 
+import Red01 from './comp/red/Red01'
+
 function App() {
   return (
     <div className="App">
@@ -32,6 +34,7 @@ function App() {
           <Route path={"/itemList"} element={<ProItemList />} />
 
           <Route path={"/ax1"} element={<Ax1 />} />
+          <Route path={'/red01'} element={<Red01 />} />
         </Routes>
       </BrowserRouter>
     </div>
@@ -63,8 +66,10 @@ function Home() {
 
       <h4>기능</h4>
       <Link to="/pro1">회원가입 창</Link><br/>
-      <Link to="/login">로그인</Link>
-      <Link to="/itemList">아이템 리스트</Link>
+      <Link to="/login">로그인</Link><br/>
+      <Link to="/itemList">아이템 리스트</Link><br/>
+
+      <Link to='/red01'>리듀서 01</Link><br/>
     </div>
   )
 }
