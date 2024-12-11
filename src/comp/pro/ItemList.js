@@ -94,7 +94,7 @@ export default function Study() {
             {/** 아이템 리스트 */}
             {items.map(
                 (item, index) => (
-                    <ItemArea item={item} index={index} onGoodUp={
+                    <ItemArea key={index} item={item} index={index} onGoodUp={
                         (idx) => {
                             const copy = items.copy;
                             console.log('부모: ', idx);
